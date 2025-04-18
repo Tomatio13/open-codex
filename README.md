@@ -17,17 +17,22 @@
 
 - [Experimental Technology Disclaimer](#experimental-technology-disclaimer)
 - [Quickstart](#quickstart)
-- [Why Codex?](#whycodex)
-- [Security Model \& Permissions](#securitymodelpermissions)
+- [Why Codex?](#why-codex)
+- [Security Model \& Permissions](#security-model--permissions)
   - [Platform sandboxing details](#platform-sandboxing-details)
-- [System Requirements](#systemrequirements)
-- [CLI Reference](#clireference)
-- [Memory \& Project Docs](#memoryprojectdocs)
-- [Non‑interactive / CI mode](#noninteractivecimode)
+- [System Requirements](#system-requirements)
+- [CLI Reference](#cli-reference)
+- [Memory \& Project Docs](#memory--project-docs)
+- [Non‑interactive / CI mode](#noninteractive--ci-mode)
+- [Tracing / Verbose Logging](#tracing--verbose-logging)
 - [Recipes](#recipes)
 - [Installation](#installation)
 - [Configuration](#configuration)
+  - [Alternative AI Providers](#alternative-ai-providers)
+    - [When using an alternative provider, make sure you have the correct environment variables set.](#when-using-an-alternative-provider-make-sure-you-have-the-correct-environment-variables-set)
 - [FAQ](#faq)
+- [Zero Data Retention (ZDR) Organization Limitation](#zero-data-retention-zdr-organization-limitation)
+- [Funding Opportunity](#funding-opportunity)
 - [Contributing](#contributing)
   - [Development workflow](#development-workflow)
   - [Writing high‑impact code changes](#writing-highimpact-code-changes)
@@ -38,9 +43,8 @@
   - [Contributor License Agreement (CLA)](#contributor-license-agreement-cla)
     - [Quick fixes](#quick-fixes)
   - [Releasing `codex`](#releasing-codex)
-- [Security \& Responsible AI](#securityresponsibleai)
+- [Security \& Responsible AI](#security--responsible-ai)
 - [License](#license)
-- [Zero Data Retention (ZDR) Organization Limitation](#zero-data-retention-zdr-organization-limitation)
 
 </details>
 
@@ -299,6 +303,7 @@ This fork of Codex supports multiple AI providers:
 - gemini
 - openrouter
 - ollama
+- grok
 
 To use a different provider, set the `provider` key in your config file:
 
@@ -318,11 +323,18 @@ Here's a list of all the providers and their default models:
 | gemini     | GOOGLE_GENERATIVE_AI_API_KEY  | gemini-2.5-pro-preview-03-25 | gemini-2.0-flash           |
 | openrouter | OPENROUTER_API_KEY            | openai/o4-mini               | openai/o3                  |
 | ollama     | Not required                  | User must specify            | User must specify          |
+| grok       | GROK_API_KEY                  | grok-3-beta                  | grok-3-beta                |
 
 #### When using an alternative provider, make sure you have the correct environment variables set.
 
 ```bash
 export GOOGLE_GENERATIVE_AI_API_KEY="your-gemini-api-key-here"
+```
+
+OR
+
+```bash
+export GROK_API_KEY="your-grok-api-key-here"
 ```
 
 ---
