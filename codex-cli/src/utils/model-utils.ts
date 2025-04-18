@@ -115,6 +115,10 @@ export function reportMissingAPIKeyForProvider(provider: string): void {
             return `- ${chalk.bold(
               "GOOGLE_GENERATIVE_AI_API_KEY",
             )} for Google Gemini models\n`;
+          case "grok":
+            return `- ${chalk.bold(
+              "GROK_API_KEY",
+            )} for Grok models\n`;
           default:
             return (
               [
@@ -123,6 +127,7 @@ export function reportMissingAPIKeyForProvider(provider: string): void {
                 `- ${chalk.bold(
                   "GOOGLE_GENERATIVE_AI_API_KEY",
                 )} for Google Gemini models`,
+                `- ${chalk.bold("GROK_API_KEY")} for Grok models`,
               ].join("\n") + "\n"
             );
         }
@@ -141,6 +146,10 @@ export function reportMissingAPIKeyForProvider(provider: string): void {
           case "gemini":
             return `You can create a Google Generative AI key here: ${chalk.bold(
               chalk.underline("https://aistudio.google.com/apikey"),
+            )}\n`;
+          case "grok":
+            return `You can create a Grok key here: ${chalk.bold(
+              chalk.underline("https://grok.x/api"),
             )}\n`;
           default:
             return "";

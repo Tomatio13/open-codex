@@ -42,6 +42,8 @@ if (!process.env["OPENAI_API_KEY"]) {
     DEFAULT_PROVIDER = "gemini";
   } else if (process.env["OPENROUTER_API_KEY"]) {
     DEFAULT_PROVIDER = "openrouter";
+  } else if (process.env["GROK_API_KEY"]) {
+    DEFAULT_PROVIDER = "grok";
   }
 }
 
@@ -68,6 +70,13 @@ function getAPIKeyForProviderOrExit(provider: string): string {
       reportMissingAPIKeyForProvider(provider);
       process.exit(1);
       break;
+    case "grok":
+      if (process.env["GROK_API_KEY"]) {
+        return process.env["GROK_API_KEY"];
+      }
+      reportMissingAPIKeyForProvider(provider);
+      process.exit(1);
+      break;
     case "ollama":
       // Ollama doesn't require an API key but the openai client requires one
       return "ollama";
@@ -87,6 +96,8 @@ function baseURLForProvider(provider: string): string {
       return "https://generativelanguage.googleapis.com/v1beta/openai/";
     case "openrouter":
       return "https://openrouter.ai/api/v1";
+    case "grok":
+      return "https://api.x.ai/v1";
     default:
       // TODO throw?
       return "";
@@ -112,6 +123,11 @@ function defaultModelsForProvider(provider: string): {
       return {
         agentic: "openai/o4-mini",
         fullContext: "openai/o3",
+      };
+    case "grok":
+      return {
+        agentic: "grok-3-beta",
+        fullContext: "grok-3-beta",
       };
     default:
       return {
@@ -143,7 +159,7 @@ export type StoredConfig = {
 // propagating to existing users until they explicitly set a model.
 export const EMPTY_STORED_CONFIG: StoredConfig = { model: "" };
 
-// Pre‑stringified JSON variant so we don’t stringify repeatedly.
+// Pre‑stringified JSON variant so we don't stringify repeatedly.
 const EMPTY_CONFIG_JSON = JSON.stringify(EMPTY_STORED_CONFIG, null, 2) + "\n";
 
 export type MemoryConfig = {
